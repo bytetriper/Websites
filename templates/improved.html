@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <style>
+        html,body{
+            width:100%;
+            height:100%;
+            margin:0;
+            overflow:hidden;
+            font-family:"微软雅黑";
+        }
+        #allmap {
+            overflow: hidden;
+            width: 62%;
+            height: 100%;
+            margin: 0;
+            border: 3px solid green;
+            float: left;
+        }
+        #text{ 
+            position: absolute;
+            top: 0px;
+            margin-left: 64%;
+            overflow: scroll;
+            width: 35%;
+            height: 100%;
+            background-color: wheat;
+            border: 10px solid rebeccapurple;
+            border-style: ridge;
+            z-index: 1;
+        }
+        #folder{
+            position: absolute;
+            top: 0px;
+            margin-left: 64%;
+            width: 35%;
+            height: 100%;
+            background-color: wheat;
+            border: 10px solid rebeccapurple;
+            border-style: ridge;
+            z-index: -2;
+        }
+        
+    </style><!--background-repeat: no-repeat;-->
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=3.0&ak=F33e6x4ipUlPgVDU7kpoHDRkyNG5abde"></script>
+    <script type="text/javascript" src="http://api.map.baidu.com/library/CurveLine/1.5/src/CurveLine.min.js"></script>
+    <title>数字历史实验
+    </title>
+</head>
+<body>  
+    <div id="allmap"></div> 
+    <div id="text"></div>
+    <div id="folder"><p>shit</p></div>
+</body>  
+</html> 
+<script>
+/*
+hrefsiz=5;
+href_content=new Array(hrefsiz);
+href_content[0]="<p><strong>1、 新式教育</strong>  <br>徐特立联合姜济寰、何雨农创办了一所面向农民子弟的小学——梨江高等小学堂（徐特立走上新的教育道路的第一块里程碑）。\
+1910年，为改革小学教育，徐特立进入江苏省教育会办的小学教师训练班学习，\
+并考察了上海的教育，随后赴日本考察，回来在周南女校任职，创办《周南教育》周刊，向教育界介绍上海、日本等地的教育经验。\
+<br><strong>2、 女子教育</strong>  <br>1906年，受朱剑凡之邀，徐特立到周南女校任教，支持刚刚兴起的女子教育事业的发展，深受学生的欢迎和尊敬。\
+<br><strong>3、 平民教育</strong>  <br>为充分“启迪民智”，徐特立积极发展平民教育。1910 年底，他在长沙创办了一所平民夜校。学生中有做工的、拉车的、挑担的，还有商店小学徒等，人数最多时近200 人。\
+<\p>"
+function display_text(i){
+    var nodefold=document.getElementById("folder");
+    //console.log(nodefold.style.zIndex);
+    nodefold.innerHTML=href_content[i];
+   if(nodefold.style.zIndex>0)
+        nodefold.style.zIndex=-2;
+    else
+        nodefold.style.zIndex=2;
+    
+}*/
+</script>
+<script>
+    var siz=15;
+    function addlisten(target,info,pos)
+    {
+        console.log(target);
+        target.addEventListener('click', function () {
+        this.openInfoWindow(info,pos);
+        });
+    }
+    s=new Array(siz);
+    data=new Array(siz);
+    data[0]="\
+";
+    data[1]="<img src='https://raw.githubusercontent.com/bytetriper/img/main/%E6%B3%95%E5%9B%BD.png' alt='法国'>1919年，国内兴起赴法国勤工俭学热潮，年已42岁的徐特立也报名前往，成为年纪最大的留学生，并被湖南省政府任命为教育专员。在法国四年间，他边做工边学法语，后入巴黎大学学习自然科学。除此之外，他先后考察了法国、比利时、德国等国家的教育，并撰写了《法国小学状况》《欧洲义务教育现状》等系列文章，向国内介绍这些欧洲国家在小学教育、女子教育、义务教育、职业教育等方面的先进经验。期间，徐特立见证了里大事件的全过程\
+<a href='https://xw.qq.com/cmsid/20210922A0BWSO00?pgv_ref=baidutw'>（百年实况回顾：被关进监狱里的学生|里昂中法大学|里昂大学|蒙吕克|赵世炎）</a>\，对“圣人”的失望和整个事件的教训，更是使徐特立经历了一场认识、立场的变化，他说：“经过这次事件，我们就不觉转到革命方面来。"
+    data[2]="<img src='https://raw.githubusercontent.com/bytetriper/img/main/%E5%B9%BF%E5%B7%9E.jpg' alt='广州'>当时的广州已经成为第一次大革命的策源地，高涨的革命形势正在向全国发展。徐特立在广州深受朋友和学生们的欢迎，他向同行们热情介绍了西欧的教育状况，并宣传在海外学习到的教育理念。"
+    data[5]="1901年，辛亥革命元老周震鳞从两湖书院毕业后，接受同学黄兴的建议，回湘办学，开化湖南风气。于是，周震鳞把宁乡驻省试馆改为宁乡驻省中学，附设速成师范科。1905年，徐特立进入宁乡速成师范读书，成为周震鳞的学生，师生之间结下了深厚情谊。刘少奇也曾在这里就读";    
+    data[6]="毕业之后，徐特立牢记周震鳞校长的教诲，抱着“创造有利于国家民族的事业”的奋斗目标，与志同道合的朋友姜济寰、何雨农一起创办了梨江高等小学堂。姜济寰任校长，徐特立负责教学事务。这是徐特立走上新的教育道路的第一块里程碑";
+    data[7]="<img src='https://raw.githubusercontent.com/bytetriper/img/main/zhounan.jpg' alt='周南女校'><br>&#x2002 &#x20021905年，朱剑凡“毁家兴学”，将长沙泰安里私宅改成校舍，创办了周南女中。朱剑凡为周南制定的校训是：自治心（节制整洁），公共心（博爱仁恕），进取心（勤勉耐劳）。";
+    data[8]="<img src='https://raw.githubusercontent.com/bytetriper/img/main/%E9%95%BF%E6%B2%99%E5%B8%88%E8%8C%83.jpg' alt='长沙师范'><br>&#x2002 &#x2002 \
+    1912年由徐特立创办，为现今湖南省长沙师范学校的前身，校训为<b>厚德博学 特立笃行</b>";
+    data[9]="<img src='https://raw.githubusercontent.com/bytetriper/img/main/%E8%BD%AC%E5%8F%98.png' alt='转变'>1926年，徐特立在长沙见到毛泽东，同他讲起国外的教育情况。在见到毛泽东之前，徐特立还在坚持走教育兴国的道路。毛泽东向老师建议\"走出书斋，到工人中去\"，到农民中去考察、体验一番，看一看中国当时的农村已经发生了怎样的变化。于是，1927年，徐特立来到了长沙五美乡进行了一周的调查工作。";
+    data[10]="<img src='https://raw.githubusercontent.com/bytetriper/img/main/%E8%8E%AB%E6%96%AF%E7%A7%91.jpeg' alt='莫斯科'><br>&#x2002 &#x2002回乡考察后的徐特立看到家乡完全变了模样，深受鼓舞，他对马列主义开始叹服。考察回来后的徐特立准备在学校进行马列主义教育，然而还没来得及实施，蒋介石就发动了“四一二”反革命政变1927， 徐特立毅然加入了中国共产党，入党在危时。1928年徐特立赴莫斯科中山大学系统地学习马列主义。这一年徐特立51岁，也是那一届学生中最年长的一员。";
+    data[11]="从1927年蒋介石及其中国国民党政府在上海发动“四一二政变”直到1949年败退台湾期间，国民党政府对共产党以及其他政治异见人士进行迫害，在各地大肆屠杀中国共产党人，一些爱国人士，民主人士和知识分子也受波及。";
+    data[12]="<img src='https://raw.githubusercontent.com/bytetriper/img/main/%E5%88%97%E5%AE%81%E5%B8%88%E8%8C%83.jpg' alt='列宁师范'>中央列宁师范是中国第二次国内革命战争时期革命根据地培养小学教师的干部学校。根据 1932 年 5 月江西省工农兵第一次代表大会文化教育工作决议，10月创办于江西瑞金，“以期养成苏区能担任文化教育工作的人材”。徐特立任校长，学员是各级苏维埃政府保送的贫苦农民子弟。";
+    data[13]="<img src='https://raw.githubusercontent.com/bytetriper/img/main/%E9%B2%81%E8%BF%85%E5%B8%88%E8%8C%83.jpg' alt='鲁迅师范'><br>&#x2002 &#x2002 鲁迅师范于１９３７年２月２日在延安成立，是党中央进驻延安后开办的第一所师范学校，由老教育家徐特立提出并经毛主席命名，为纪念鲁迅先生和培养教师、干部而设立。鲁迅师范从成立到结束历时两年多时间，三次搬迁，培养出千余名学员，成为后来边区教育工作的主力军。";
+    data[14]="<img src='https://raw.githubusercontent.com/bytetriper/img/main/Yanan.jpg' alt='徐特立在延安自然科学院'><br>&#x2002 &#x2002 1940年9月初，延安自然科学院成立。这是中国共产党领导的第一所理工科高等学校。李富春、徐特立、李强先后担任院长。设有物理、化学、生物、地(质)矿(冶)4个系。学制三年。为适应教学和科学研究的需要，该院还建立机械实习厂、化工实习厂、化学实验室和生物实验室等学院培养了一批技术骨干队伍，在配合陕甘宁边区经济建设方面作出了贡献。1943年4月并入延安大学。延安自然科学院后辗转办学，数易其名，1952年定名北京工业学院，1988年易名北京理工大学";
+    function data_form(){
+        for(var i=0;i<siz;++i)
+            data[i]="<div style='overflow: scroll'>"+data[i]+"</div>";
+        return data;
+    }
+</script>
+<script>
+    var map = new BMap.Map("allmap");  
+    var point = new BMap.Point(112.943745,28.233617);  
+    map.centerAndZoom(point, 9);   
+    map.addControl(new BMap.NavigationControl());    
+    map.addControl(new BMap.ScaleControl());    
+    map.addControl(new BMap.OverviewMapControl());  
+    map.enableScrollWheelZoom(true);
+    var CSPosition=new BMap.Point(112.943745,28.233617),
+        NSschoolPostion=new BMap.Point(112.570769,28.281433);
+        //SHPosition=new BMap.Point(121.478815,31.234694),
+        //JSPosition=new BMap.Point(118.803473,32.073876),
+        //JSPosition=new BMap.Point(118.803473,32.073876),
+        //JPPostion=new BMap.Point(139.772012,35.732481),
+        FRPostion=new BMap.Point(2.337552,48.856995),
+        GZPostion=new BMap.Point(113.269129,23.136134),
+        //SLPostion=new BMap.Point(37.620184,55.758095),
+        JXPostion=new BMap.Point(115.866553,28.691069),
+        YAPostion=new BMap.Point(109.502912,36.654006);
+        //HNSHPosition=new BMap.Point(113.146814,28.381921);
+        NJGDschoolPosition=new BMap.Point(112.567022,28.262788);
+        ZNschoolPosition=new BMap.Point(112.972302,28.309908);
+        CSSFschoolPosition=new BMap.Point(113.090104,28.262152); 
+        CSWMPosition=new BMap.Point(113.302549,28.080993);
+        MoscowPosition=new BMap.Point(37.528677,55.703926);
+        SHposition=new BMap.Point(121.479678,31.228148);
+        ZYLNschoolPosition=new BMap.Point(116.036872,25.889326);
+        YA2Position=new BMap.Point(109.504636,36.76684);
+        YA3Position=new BMap.Point(109.329,36.805224);
+    var siz=15;//number of the locations
+    var points = [CSPosition,FRPostion,GZPostion,JXPostion,YAPostion,NSschoolPostion,NJGDschoolPosition,ZNschoolPosition,
+                    CSSFschoolPosition,CSWMPosition,MoscowPosition,SHposition,ZYLNschoolPosition,YA2Position,YA3Position
+                    ];
+    var myIcon = new BMap.Icon("https://raw.githubusercontent.com/bytetriper/img/main/icon.jpg", new BMap.Size(20,20));
+    var marker= new Array(siz);
+    for(var i=0;i<siz;++i)
+        marker[i]=new BMap.Marker(points[i],{icon: myIcon});
+    for (var i = 0; i < siz; ++i) {
+        map.addOverlay(marker[i]);
+    }//将点添加到地图中
+    //var curve = new BMapLib.CurveLine(points, {strokeColor:"black", strokeWeight:3, strokeOpacity:0.5}); //创建弧线对象
+    //map.addOverlay(curve); //将弧线添加到地图中
+    var infoWindow = new Array(siz);
+    // 定义html字符串
+    var sContent = data_form();
+    // marker添加点击事件
+    for(var i=0;i<siz;++i)
+    {    
+        console.log(sContent[i]);
+        
+        try{
+        infoWindow[i]=new BMap.InfoWindow(sContent[i]);
+        addlisten(marker[i],infoWindow[i],points[i])}
+        catch(e){
+            console.log(i);
+        }
+    }
+function add(target,i)
+{
+    return "<a style='color:green' href='javascript:void(0);' onclick='marker["+i+"].openInfoWindow(infoWindow["+i+"],points["+i+"]);'>"+target+"</a>"
+}
+        </script>
+
+<script>
+    var parasiz=18;
+    s[0]="\
+    &#x2002 &#x2002徐特立原名茂生，进入社会后为了“见精神”而自改名为“特立”。徐特立是我国杰出的人民教育家，从长沙开始，徐老一生长达 70多年的教育生涯中，\
+    早年一心教育救国，50 岁时加入中国共产党，此后潜心“为革命办教育，用革命精神和革命方法办教育”。\
+    在这过程中，徐特立一方面努力学习和吸收古今中外的优秀教育思想并用于自己的教育实践，另一方面认真总结实践经验并上升到理论的高度，从而逐渐形成了自己的教育思想。\
+    徐特立教育思想的形成与发展历程，大致经历了摸索、初生、发展、成熟几个时期。"
+    s[1]="摸索期"
+    s[1]=s[1].bold();
+    s[2]="&#x2002 &#x2002这一时期，徐特立教书的主要目的就是为了谋生，加上年轻，又仅读过 6 年私塾，尽管刻苦自学，但知识积累及教育教学经验都很不够，因而其教育工作完全处于一个摸索期"
+        +"\
+1877年，徐特立先生出生在了湖南的一个贫农家庭里。母亲的早逝、父亲的整日劳累和生活的极度窘迫，使他初尝人世的艰辛。九岁开始，徐特立开始进入私塾接受教育。16岁时，徐特立因生计被迫辍学。18岁时，徐特立作出从文的决定，“确定教书兼习科举业”，他认为，这样“可以进步，又可谋生”。之后，徐特立一边在家乡当农村塾师，一边“兼习科举”。";
+    s[3]="初生期"
+s[3]=s[3].bold();
+s[4]="在宁乡速成师范";
+s[4]=s[4].bold();
+s[5]="&#x2002 &#x2002这一时期，徐特立由教书谋生转向服务社会，积极从事新式教育，并一度致力于小学教育改革，标志着其教育思想的萌生。";
+s[6]="&#x2002 &#x2002 1905年，徐特立考入了由同盟会会员周震鳞在长沙城创办的宁乡速成师范，在那里学习了讲授资产阶级革命的课程，并接受了资产阶级民主思想。";
+s[7]="&#x2002 &#x2002 <a style='color:green' href='javascript:void(0);' onclick='marker[5].openInfoWindow(infoWindow[5],points[5]);'>宁乡速成师范</a>是徐特立的政治思想和教育思想发生重大转变的地方。在进入宁乡师范之前，徐特立虽已看透封建教育的落后无聊，但早年所受的封建私塾教育仍对他影响颇深。进入宁乡师范后，一方面，受学校浓厚的资产阶级民主革命氛围影响，徐特立从推崇康梁的改良主义转为支持孙中山的三民主义；另一方面，他从不满封建教育却又是封建教育的接收者和施行者，转变为以教育救国为核心的近代民主教育思想的倡导者和推行者。学习四个月后，徐特立从速成班毕业。校长周震鳞在毕业典礼上的一番发言（我们办这个学校，不是专为培养你们当一个好教员，得到社会上的荣誉和地位，更重要的使希望你们创造事业，创造有利于国家民族的事业。）使徐特立深受鼓舞。他决心把校长所说的“创造事业”作为自己奋斗一生的目标。";
+s[8]="<b>积极投身教育实践</b>\
+<br>&#x2002 &#x2002从宁乡师范毕业后，徐特立积极投身教育事业，认为教育可以启迪民智。这一时期他主要参与了新式教育、女子教育、平民教育三方面的教育实践。\n \
+<br>1、<b>新式教育</b>  <br>徐特立联合姜济寰、何雨农创办了一所面向农民子弟的小学——<a style='color:green' href='javascript:void(0);' onclick='marker[6].openInfoWindow(infoWindow[6],points[6]);'>梨江高等小学堂</a>。1910年，为改革小学教育，徐特立进入江苏省教育会办的小学教师训练班学习，并考察了上海的教育，随后赴日本考察，回来在周南女校任职，创办《周南教育》周刊，向教育界介绍上海、日本等地的教育经验。 \
+<br>2、<b>女子教育</b>  <br>1906年，受朱剑凡之邀，徐特立到<a style='color:green' href='javascript:void(0);' onclick='marker[7].openInfoWindow(infoWindow[7],points[7]);'>周南女校</a>任教，支持刚刚兴起的女子教育事业的发展，深受学生的欢迎和尊敬。\
+<br>3、<b>平民教育</b>  <br>为充分“启迪民智”，徐特立积极发展平民教育。1910 年底，他在长沙创办了一所平民夜校。学生中有做工的、拉车的、挑担的，还有商店小学徒等，人数最多时近200 人。\
+";
+s[9]="&#x2002 &#x2002在从事教育工作的同时，徐特立也非常关心政治。1911 年 10 月，武昌起义爆发后，徐特立积极参与湖南新军起义的发动，并在革命胜利后短暂担任湖南省临时议会副议长。后因不堪忍受官场腐败，徐特立辞职回到教育界。";
+s[10]="<b>新的教育思想萌芽</b>\
+<br>&#x2002 &#x2002 重回教育界后，徐特立的教育观发生了变化。这一时期的徐特立希望“用教育来改革人心”，并从此“变成一个教育救国论者”。\
+<br>&#x2002 &#x2002 这时的徐特立希望“用教育来改革人心”，并从此“变成一个教育救国论者”。\
+<br>&#x2002 &#x2002 具体来看，<b>在第一阶段，也就是1912年1月至1919年6月间</b>，徐特立的教育实践与思想主要表现在以下四个方面：学校管理、师范教育、教育法和教授学的教学研究、平民教育实践。\
+<br>1.<b>学校管理</b>:<br>创办<a style='color:green' href='javascript:void(0);' onclick='marker[8].openInfoWindow(infoWindow[8],points[8]);'>长沙师范学校</a>并担任校长；\
+<br>2.<b>师范教育</b>:<br>先后任教于长沙县立师范、湖南省立第一师范、湖南高等师范等学校着力培养发展长沙基础教育所急需的师资，热情地鼓励学生“大家努力树桃李，使我古潭追邹鲁”；\
+<br>3.<b>从事教育学、教授法的教学和研究</b>: <br>先后撰写、出版《教育学》《初等小学国文教授法》《小学各科教授法》等著作；\
+<br>4.<b>继续参与平民教育实践</b>:<br>曾担任湖南孤儿院院长。\
+<br>&#x2002 &#x2002<b>第二阶段则是在1919年7月至1924年7月期间</b>，徐特立赴<a style='color:green' href='javascript:void(0);' onclick='marker[1].openInfoWindow(infoWindow[1],points[1]);'>法国</a>。\
+<br>&#x2002 &#x2002徐特立学成归国后，继续践行其“教育救国”的理念。1924年的夏天，徐特立回到了中国，抵达<a style='color:green' href='javascript:void(0);' onclick='marker[2].openInfoWindow(infoWindow[2],points[2]);'>广州</a>后返回长沙。\
+\
+\
+<br>&#x2002 &#x2002从进入宁乡师范学习到赴法留学，这一时期徐特立在教育思想方面出现了以下四个方面的突破：首先是深感“国家的存亡问题有做启蒙的必要”，意识到“人民大众不参加爱国运动是由于无知，救国的方法首在教育”，一心走上教育救国的道路；二则是将自己的教育学理论特别是教学法思想系统化，撰写了《教育学》等多部专著；三是受到西方民主教育、科学教育、义务教育、女子教育等思想的影响，并积极向国内传播这些思想；四是在学校管理以及教育行政方面积累了丰富的实践经验。这也标志着徐特立教育思想的正式产生。\
+\
+";
+s[11]="<b>发展期</b>";
+s[11]=s[11].bold();
+s[12]="&#x2002 &#x2002 徐特立曾一直信奉“教育救国”论，但在革命潮流中，徐特立的思想发生了<a style='color:green' href='javascript:void(0);' onclick='marker[9].openInfoWindow(infoWindow[9],points[9]);'>转变</a>。1927年，徐特立在回乡之行中，深深感受到了山乡的巨变。从山乡巨变中，徐特立看到了农民所爆发出的伟大的社会力量，于是否定了“教育救国”论，从此坚定的走上了革命的道路，并在蒋介石发动反革命政变的革命危急时刻毅然参加了中国共产党。随后，1928年，徐特立在党组织的安排下前往苏联入<a style='color:green' href='javascript:void(0);' onclick='marker[10].openInfoWindow(infoWindow[10],points[10]);'>莫斯科中山大学</a>学习。";
+s[13]="&#x2002 &#x2002 1930年，徐特立学成归国。此时，国内正处于<a style='color:green' href='javascript:void(0);' onclick='marker[11].openInfoWindow(infoWindow[11],points[11]);'>白色恐怖时期</a>。他历经艰苦，抵达红军的总部驻地。来到了中央苏区后，徐特立开始致力于苏区的教育工作，在苏区，徐特立做的第一件大事是扫盲。他深入到各个地区考察调研，最终拟定了简便易行的扫盲方法，将苏区的文盲率大大降低。徐特立还十分重视师范教育的发展。他主持创办了<a style='color:green' href='javascript:void(0);' onclick='marker[12].openInfoWindow(infoWindow[12],points[12]);'>中央列宁师范</a>，旨在为苏区培训师资。即使客观条件十分艰苦，徐特立还是凭借着他的革命精神与行动力为苏区培养了一大批优秀的教师。他还倡导讲实话、做实事……徐特立的一系列举动，极大促进了苏区教育工作的发展。<br>\
+&#x2002 &#x2002 由于第五次反“围剿”的失败，徐特立跟随红军离开苏区，踏上长征路。长征途中，凭借革命乐观主义精神，徐特立克服了一个又一个的艰难险阻。即使是在艰苦的长征途中，徐特立也时刻惦记着文化教育事业，没有忘记自己教育家的天职：在连队里，徐特立只要有机会就教战士学习文化知识，致力于提高他们的文化水平。克服重重困难，徐特立最终随部队最终胜利到达陕北。\
+";
+s[14]="<b>成熟期</b>";
+s[14]=s[14].bold();
+s[15]="&#x2002 &#x2002 这一时期，徐特立主要在延安工作，其教育理论已经科学化、系统化，标志着他教育思想的成熟。他积极将理论运用到教育实践活动中，显示了一个马克思主义教育家的远见卓识，徐特立一直致力于教育事业，始终保持着教育家的谦逊，以各种途径带动中国的教育发展，培养了许许多多的学生，赢得了无数人的尊重。";
+s[16]="&#x2002 &#x2002 1935年11月，徐特立任中华苏维埃共和国临时中央政府西北办事处教育部长，领导陕北苏区的教育工作。徐特立在陕北地区分别指导各地根据各自的情况和条件创办学校，调动群众办学的积极性，使陕北地区落后不堪的教育状况逐渐发生了变化。1935年冬，徐特立办了列宁小学教师培训班，担任班主任，编写教材，亲自讲课，为边区培养了第一批小学教师；又帮助整顿<a style='color:green' href='javascript:void(0);' onclick='marker[13].openInfoWindow(infoWindow[13],points[13]);'>鲁迅师范</a>建立制度，设置课程，为边区培养了许多优秀的乡村小学教师。<br>\
+1940年11月7日，徐特立在陕甘宁边区新文字协会举办的大会上发表了推行新文字的讲话。";
+s[17]="&#x2002 &#x2002 1940年12月，徐特立担任<a style='color:green' href='javascript:void(0);' onclick='marker[14].openInfoWindow(infoWindow[14],points[14]);')>延安自然科学院</a>院长领导全院师生艰苦奋斗，战胜物质上的困难，克服人们思想认识上的障碍。创办延安自然科学院的目的不仅是为自力更生的发展边区经济造就急需的科技力量，还是为将来建设新中国准备必要的科级干部。徐特立曾发表《怎样进行自然科学的研究》和《怎样发展我们的自然科学》，说明科学的重要性和加强系统的基础理论教学的重要性，其中的许多宝贵意见至今仍被许多教育工作者记取着。";
+s[18]="&#x2002 &#x2002 徐特立在担任延安自然科学院院长期间，还曾担任中央宣传部副部长。他十分注重群众性的科学技术教育活动，在此期间，徐特立曾倡导成立土木工程学会、中国农业会，举办科学展览会等，并多次出席文化教育界的活动。徐特立还对史学工作十分重视。他不仅自己动手做研究工作，同时还组织了一批史学工作者和中宣部、中央党校的部分干部搜集整理资料，并主持了《中国通史资料选编》的选编工作。<br>\
+徐特立在晚年时期，仍然坚守在祖国建设前线，奋力于将自己的心血更好地奉献给祖国。他在72岁时仍身兼数职，参加接管全国文化教育事业的领导工作。";
+for(var i=0;i<=parasiz;++i)
+{
+    var tmp=document.createElement("p");
+    //var t=document.createTextNode(s[i]);
+    tmp.innerHTML=s[i];
+    if(i==1||i==3||i==11||i==14)
+        tmp.style="text-align:center;font-size:20px;";
+    document.getElementById("text").appendChild(tmp);
+    
+}
+/*
+var tmp=document.getElementById("test");
+tmp.scrollIntoView(true);
+tmp.scrollIntoView({
+    behavior:"smooth"
+});*/
+</script>

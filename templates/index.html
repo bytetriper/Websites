@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+    #cy {
+    width: 100%;
+    height: 100%;
+  display: block;
+  position:absolute;
+  background-image:url("https://raw.githubusercontent.com/bytetriper/img/main/bg.gif");
+}
+</style>
+<script src="https://cdn.jsdelivr.net/npm/cytoscape@3.22.1/dist/cytoscape.min.js"> </script>
+<script>// Read json (Copied From https://blog.csdn.net/ClearLoveQ/article/details/90480207)
+  getJson=function () {
+          var url = "tree.json"/*json文件url，本地的就写本地的位置，如果是服务器的就写服务器的路径*/
+          var request = new XMLHttpRequest();
+          request.open("get", url);/*设置请求方法与路径*/
+          request.send(null);/*不发送数据到服务器*/
+          request.onload = function () {/*XHR对象获取到返回信息后执行*/
+              if (request.status == 200) {/*返回状态为200，即为数据获取成功*/
+                  Tree= JSON.parse(request.responseText);
+                  /*for(var i=0;i<json.length;i++){
+                    console.log(json[i].name);
+                  }
+                  console.log(json);*/
+                  //console.log(Tree);
+                  console.log("Init Successed");
+              }
+              else
+                console.log("Fail to Reach Tree");
+          }
+     }
+</script>
+<script>
+  var Tree={
+    ".": [
+        "Windows",
+        "about",
+        "Linux"
+    ],
+    "Windows": [
+        "google"
+    ],
+    "Linux": [
+        "test"
+    ]
+};
+</script>
+</head>
+
+<body>
+    <div id='cy'></div>
+<script>// Create canvas
+    cytoscape.warnings(true);
+    var cy = cytoscape({
+
+container: document.getElementById('cy'), // container to render in
+style: [ // the stylesheet for the graph
+  {
+    selector: 'node',
+    style: {
+      'background-color': '#666',
+      'label': 'data(id)',
+      'shape':'round-rectangle',
+      'width':'50px',
+      'height':'30px',
+      'background-color':'blue',
+      'background-opacity':0.8,
+      'border-style':'solid',
+      'border-color':'blue',
+      'border-width':'1px',
+      'padding':'50%'
+    }
+  },
+
+  {
+    selector: 'edge',
+    style: {
+      'width': 3,
+      'line-color': '#ccc',
+      'target-arrow-color': '#ccc',
+      'target-arrow-shape': 'triangle',
+      'curve-style': 'bezier'
+    }
+  }
+],
+//Interact Choice
+  minZoom: 0.5,
+  maxZoom: 7,
+  zoomingEnabled: true,
+  userZoomingEnabled: true,
+  panningEnabled: true,
+  userPanningEnabled: true,
+  boxSelectionEnabled: true,
+  selectionType: 'single',
+  touchTapThreshold: 8,
+  desktopTapThreshold: 4,
+  autolock: false,
+  autoungrabify: false,
+  autounselectify: false,
+  multiClickDebounceTime: 250,
+  // rendering options:
+  headless: false,
+  styleEnabled: true,
+  hideEdgesOnViewport: false,
+  textureOnViewport: false,
+  motionBlur: false,
+  motionBlurOpacity: 0.2,
+  wheelSensitivity: 0.1,
+  pixelRatio: 'auto',
+layout : {
+  name: 'breadthfirst',
+  fit: true, // whether to fit the viewport to the graph
+  directed: false, // whether the tree is directed downwards (or edges can point in any direction if false)
+  padding: 30, // padding on fit
+  circle: false, // put depths in concentric circles if true, put depths top down if false
+  grid: false, // whether to create an even grid into which the DAG is placed (circle:false only)
+  spacingFactor: 1.75, // positive spacing factor, larger => more space between nodes (N.B. n/a if causes overlap)
+  boundingBox: undefined, // constrain layout bounds; { x1, y1, x2, y2 } or { x1, y1, w, h }
+  avoidOverlap: true, // prevents node overlap, may overflow boundingBox if not enough space
+  nodeDimensionsIncludeLabels: false, // Excludes the label when calculating node bounding boxes for the layout algorithm
+  roots: undefined, // the roots of the trees
+  maximal: false, // whether to shift nodes down their natural BFS depths in order to avoid upwards edges (DAGS only)
+  depthSort: undefined, // a sorting function to order nodes at equal depth. e.g. function(a, b){ return a.data('weight') - b.data('weight') }
+  animate: false, // whether to transition the node positions
+  animationDuration: 500, // duration of animation in ms if enabled
+  animationEasing: undefined, // easing of animation if enabled,
+  animateFilter: function ( node, i ){ return true; }, // a function that determines whether the node should be animated.  All nodes animated by default on animate enabled.  Non-animated nodes are positioned immediately when the layout starts
+  ready: undefined, // callback on layoutready
+  stop: undefined, // callback on layoutstop
+  transform: function (node, position ){ return position; } // transform a given node position. Useful for changing flow direction in discrete layouts
+}
+
+});
+</script>
+<script>//assert title to be a string obj
+    function createNode(title,x0,y0,weight_v=50){
+    cy.add([{
+        group:'nodes',
+        data:{weight:weight_v,id:title,is_leaf:"false"},
+        position:{x:x0,y:y0}
+    }]);
+  }
+    function createEdge(nodex,nodey){
+      cy.add([{
+        group:'edges',
+        data:{id:(nodex+'-'+nodey),source:nodex,target:nodey}
+      }]);
+    }
+</script>
+<script>
+  var length=300;
+  function find_position(line,col)
+  {
+      return [0,0];
+  }
+  function BuildTree(Structure){
+      if (!Structure.hasOwnProperty('.'))
+        return;
+      queue=[['.',0]];
+      createNode('.',100,2000,100);
+      ft=0,rear=0;
+      while (ft<=rear)
+      {
+          now=queue[ft++][0];
+          console.log(now);
+          if (!Structure.hasOwnProperty(now))
+          {
+              cy.$('#'+now).data('is_leaf',"true");
+              cy.$('#'+now).style('background-color','yellow');
+              continue;
+          }
+          height_per_element=1.0/Structure[now].length;
+          for(var i=0;i<Structure[now].length;++i)
+          {
+              sonname=Structure[now][i];
+              queue[++rear]=[sonname,0];
+              createNode(sonname,100,2000,cy.$('#'+now).data.weight-20);
+              createEdge(now,sonname);
+          }
+      }
+  }
+</script>
+<script>
+  console.log(Tree);
+  BuildTree(Tree);
+  var layout=cy.layout({name:'breadthfirst'});
+  cy.on('tap','node[is_leaf="true"]',function(evt){// Add HyperLink
+    var node=evt.target;
+    node.shape='circle';
+    if (node.id()=='about')
+      window.open("/"+node.id());
+    else{
+      window.open('/content/'+node.id());
+    }
+  })
+  cy.on('tap','node[is_leaf="false"]',function(evt){// Add HyperLink
+      if(cy.$('#Tmp').length)
+      {
+        cy.$('#Tmp').remove();
+      }
+      createNode('Tmp',1000,1000,evt.target.data.weight-20);
+      createEdge(evt.target.id(),'Tmp');
+  })
+  layout.run();
+</script>
+<p style="background:none;height: 5%;position: fixed;bottom: 0px;width: 100%;text-align: center;
+"><img style="padding-top:2px;" src="https://raw.githubusercontent.com/bytetriper/img/main/%E5%9B%BD%E5%BE%BD1024.png" width="20px" height="20px"><a class="banquan" style="color:#000;"
+        href="http://www.beian.gov.cn"
+        target="_blank">粤ICP备2022103919号</a></p>
+</body>
+</html>
